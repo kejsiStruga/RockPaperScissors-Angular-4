@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
+        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">     
+        <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+        <div id="round-count" *ngIf="count < 5; else elseBlock"> ROUND:  {{ count + 1 }} </div>
+        <ng-template #elseBlock>
+            <div id="round-count">
+              You {{ winState }}!
+            </div> 
+          </ng-template>
+        <div class="wrapper clearfix">
+            <div class="player-0-panel active">
+                <div class="player-name" id="name-0">You</div>
+                <!-- <div class="player-score" *ngIf="count <=4;" id="score-0">{{ userScore }}</div> -->
+                <div class="player-score" *ngIf="count <=4 && count>0;" id="score-0"><img [src]="userImgState" alt="state"></div>
+                    <ol *ngIf = "count>4" id="user-list"> 
+                        <li *ngFor="let userChoice of addUserTokenValues">
+                          {{ userChoice }}
+                        </li>
+                    </ol>     
+            </div>
+            <div class="player-1-panel">
+                <div class="player-name" id="name-1">Computer</div>
+                <div class="player-score" *ngIf="count <=4 && count>0;" id="score-1"><img [src]="computerImgState"></div>
+                    <ol *ngIf = "count>4" id="computer-list"> 
+                        <li *ngFor="let computerChoice of addComputerValues">
+                          {{ computerChoice }}
+                        </li>
+                    </ol>
+            </div>
+            
+            <button class="btn-new" [disabled]="count <= 4" (click)="NewGame($event)"><i class="ion-ios-plus-outline"></i>New game</button>
+        
+            <div><button id="0.2" [disabled]="count > 4" (click)="Increment($event)" class="paper"><i class="ion-paper-airplane"></i>PAPER</button></div>
+            <div><button id="0.4" [disabled]="count > 4" (click)="Increment($event)" class="scissors"><i class="ion-scissors"></i>SCISSORS</button></div>
+            <div><button id="0.8" [disabled]="count > 4" (click)="Increment($event)" class="stone"><i class="ion-xbox"></i>STONE</button></div>    
+          
+       </div>
+    </body>
+</html>
